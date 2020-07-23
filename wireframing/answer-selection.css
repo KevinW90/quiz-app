@@ -31,8 +31,14 @@ body {
   justify-content: space-between;
 
   padding: 20px;
+}
 
-  background: #555;
+.quiz-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 1.4rem;
 }
 
 .question-container {
@@ -44,7 +50,9 @@ body {
   align-items: center;
   justify-content: space-between;
 
-  /* background:red; */
+  padding: 20px;
+
+  background: #555;
 }
 
 .question-container > div {
