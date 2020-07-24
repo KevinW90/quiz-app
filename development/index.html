@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
+  <!-- START PAGE -->
   <section class="start-page">
     <div class="content">
       <div class="title">
@@ -24,10 +25,11 @@
     </div>
   </section>
 
-  <section class="question-display">
+  <!-- QUESTION PAGE -->
+  <section class="question-page">
     <div class="quiz-info">
-      <div>Question: <span id="currentQuestion"></span>/<span id="totalQuestions"></span></div>
-      <div>Score: <span id="score"></span></div>
+      <div>Question: <span id="currentQuestion"><!-- jq fill --></span>/<span id="totalQuestions"><!-- jq fill --></span></div>
+      <div>Score: <span id="score"><!-- jq fill --></span></div>
     </div>
     <div class="content">
       
@@ -35,22 +37,22 @@
       <form id="form">
         <div>
           <input id=0 type="radio" name="choice" value=0 />
-          <label for=0></label>
+          <label for=0><!-- jq fill --></label>
         </div>
         
         <div>
           <input id=1 type="radio" name="choice" value=1 />
-          <label for=1></label>
+          <label for=1><!-- jq fill --></label>
         </div>
         
         <div>
           <input id=2 type="radio" name="choice" value=2 />
-          <label for=2></label>
+          <label for=2><!-- jq fill --></label>
         </div>
         
         <div>
           <input id=3 type="radio" name="choice" value=3 />
-          <label for=3></label>
+          <label for=3><!-- jq fill --></label>
         </div>
         
         <input type="submit" class="btn" value="Final Answer" />
@@ -58,21 +60,25 @@
     </div>
   </section>
 
+  <!-- RESULTS PAGE -->
   <section class="results-page">
     <div class="content">
       <div class="title">
-        You <span id="pass-fail"></span> this quiz.
+        You <span id="pass-fail"><!-- jq fill --></span> this quiz.
       </div>
 
       <div class="subtitle">
-        <div>Total Questions: <span id="questionAmount"></span></div>
-        <div>Correct Answers: <span id="correctAnswers"></span></div>
-        <div>Incorrect Answers: <span id="incorrectAnswers"></span></div>
+        <div>Total Questions: <span id="questionAmount"><!-- jq fill --></span></div>
+        <div>Correct Answers: <span id="correctAnswers"><!-- jq fill --></span></div>
+        <div>Incorrect Answers: <span id="incorrectAnswers"><!-- jq fill --></span></div>
 
-        <div>Grade: <span id="percentage"></span></div>
+        <div>Grade: <span id="percentage"><!-- jq fill --></span></div>
       </div>
       
-      <div class="btn">retake</div>
+      <div class="result-btns">
+        <div class="btn">Retake</div>
+        <div class="btn">Home</div>
+      </div>
     </div>
   </section>
 

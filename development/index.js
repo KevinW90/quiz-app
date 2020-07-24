@@ -1,26 +1,6 @@
 // A bank of questions to ask
 const STORE = [
   {
-    question: "Where are you going?",
-    answers: [
-      'Nowhere',
-      'Everywhere',
-      'Somewhere',
-      'Why do you need to know?'
-    ],
-    correctAnswer: 2
-  },
-  {
-    question: "Why are we here?",
-    answers: [
-      'Because we need to be.',
-      'Go home.',
-      'To solve a problem',
-      'To eat breakfast'
-    ],
-    correctAnswer: 0     
-  },
-  {
     question: "What are you doing",
     answers: [
       'Nothing',
@@ -29,6 +9,16 @@ const STORE = [
       'Why do you need to know?'
     ],
     correctAnswer: 3
+  },
+  {
+    question: "Where are you going?",
+    answers: [
+      'Nowhere',
+      'Everywhere',
+      'Somewhere',
+      'Why do you need to know?'
+    ],
+    correctAnswer: 2
   },
   {
     question: "What's for breakfast?",
@@ -49,7 +39,17 @@ const STORE = [
       'Why do you need to know?'
     ],
     correctAnswer: 2
-  }
+  },
+  {
+    question: "What's for dinner?",
+    answers: [
+      'Nothing',
+      'Everything',
+      'Something',
+      'Why do you need to know?'
+    ],
+    correctAnswer: 0
+  },
 ];
 
 //variables for quiz info
@@ -60,36 +60,43 @@ let totalQuestions;
 
 const clickHandler = (e) => {
   e.preventDefault();
-  let btnText = e.target.textContent.toLowerCase() || e.target.value.toLowerCase();
-  console.log(btnText);
+  //convert target to jq object
+  const $target = $(e.target);
+  let btnText = $target.text().toLowerCase() || $target.val().toLowerCase();
+  //switch is a condensed if
   switch(btnText){
-    case 'start':
+    //start and retake do the same thing
+    case 'start': //if (btnText === 'start')
+    case 'retake': //if (btnText === 'retake')
       startQuiz();
-      break;
-    case 'final answer':
+      break; //means else
+    case 'final answer': //else if (btnText === 'final answer')
       checkAnswer();
-      break;
-    case 'next':
+      break; //means else
+    case 'next': //else if (btnText === 'next')
       //update question count
       curQ++;
-      console.log(curQ)
       //display next question
       displayQuestion();
-      break;
-    case 'retake':
-      startQuiz();
-      break;
-    default:
+      break; //means else
+    case 'home': //else if (btnText === 'home')
+      //hide results page
+      $('.results-page').hide();
+      //show start page
+      $('.start-page').show();
+      break; //means else
+    default: //else
       alert("That doesn't do anything");
+      //no break; (else) because no more tests
   }
 }
 
 const displayQuestion = () => {
   //check for existing question
-  if (curQ < totalQuestions) {
+  if (curQ < totalQuestions) { //more questions
     //get current question details
     const questionText = STORE[curQ].question;
-    const possibleAnswers = STORE[curQ].answers;
+    const choices = STORE[curQ].answers;
 
     //quiz details
     $('#currentQuestion').text(curQ + 1);
@@ -98,24 +105,30 @@ const displayQuestion = () => {
 
     //populate form fields
     $('#questionArea').text(questionText);
-    possibleAnswers.forEach((el, ndx) => {
+    /*
+    for (let i = 0; i < choices.length; i++) {
+      $(`label[for=${i}]`).text(choices[i]);
+    }
+    */
+    choices.forEach((el, ndx) => {
+      //change label text (for attribute)
       $(`label[for=${ndx}]`).text(el);
-    })
+    });
 
     //take off previous selection
+    $('[type="radio"]').prop('checked', false);
     $('form > div').removeClass('selected correct incorrect');
 
-    //change to 'final answer'
+    //change submit button text to 'final answer'
     $('input[type="submit"]').val('Final Answer');
-  } else {
-    console.log('hi')
+  } else { //no more questions
     displayResults();
   }
 }
 
 const displayResults = () => {
   //hide quiz
-  $('.question-display').hide();
+  $('.question-page').hide();
   //show results page
   $('.results-page').show()
   //calculations
@@ -125,7 +138,9 @@ const displayResults = () => {
   $('#incorrectAnswers').text(totalQuestions - score);
   $('#percentage').text(percentage + '%');
 
-  percentage > 70 ? $('#pass-fail').text('PASSED') : $('#pass-fail').text('FAILED')
+  //pass or fail text based on percentage greater than or equal to 70%
+  // percentage >= 70 ? $('#pass-fail').text('PASSED') : $('#pass-fail').text('FAILED');
+  $('#pass-fail').text(percentage >= 70 ? 'passed' : 'failed');
 }
 
 const startQuiz = () => {
@@ -138,13 +153,13 @@ const startQuiz = () => {
   //hide start page
   $('.start-page').hide();
   //show quiz
-  $('.question-display').show();
+  $('.question-page').show();
 }
 
 const checkAnswer = () => {
+  //double $() wrapper to convert to jq object
   let userChoice = $($('input[name="choice"]:checked')[0]);
-  console.log(userChoice);
-  if (userChoice.val() == STORE[curQ].correctAnswer) {
+  if (Number(userChoice.val()) === STORE[curQ].correctAnswer) {
     score++;
     $('#score').text(score);
     //highlight green
@@ -153,12 +168,11 @@ const checkAnswer = () => {
     //user choice red
     userChoice.parent().addClass('incorrect');
     //correct answer green
-    $(`input[id=${STORE[curQ].correctAnswer}]`).parent().addClass('correct');
-    console.log('wrong')
+    $(`[id=${STORE[curQ].correctAnswer}]`).parent().addClass('correct');
   }
 
   //change button text
-  $('input[type="submit"]').val('Next');
+  $('[type="submit"]').val('Next');
 }
 
 $(document).ready(function(){
@@ -170,17 +184,17 @@ $(document).ready(function(){
   //form div listener to check radio button
   $('form > div').on('click', function(event){
     //set all radio buttons to false
-    $('input[type="radio"]').prop("checked", false);
+    $('[type="radio"]').prop('checked', false);
     //find closest radio button, and check it
-    $(this).find('input').prop("checked", true);
+    $(this).find('[type="radio"]').prop('checked', true);
     //remove any selected classes
     $('form > div').removeClass('selected');
-    //add white border to div
+    //add white border to selected answer
     $(this).addClass('selected');
   })
 
   //hide question display area
-  $('.question-display').hide();
+  $('.question-page').hide();
   //hide results page
   $('.results-page').hide();
 })
@@ -197,3 +211,41 @@ $(document).ready(function(){
     //increase score if correct
   //display correctness
 //display results page
+
+/*
+the page loads with the start screen
+  add event listeners at this point so they are only created one time per element
+    ('.btn', user choice) listeners
+      '[class="btn"]', 'form div'
+  hide all sections except for start page
+    (questions, results) pages
+      '.question-page', '.results-page'
+start quiz button is clicked
+  set quiz related info to initial values
+    (curQ, score, totalQuestions)
+display questions
+  hide start page
+  get question info
+    (STORE)
+a choice is selected
+  check the radio button that goes with that choice
+    'form div' > find input element
+answer is submitted
+  '.btn' click
+check answer
+  get user choice
+    ':checked'
+  get correct answer
+    STORE[].correctAnswer
+correctness of answer
+  highlight correct with green
+  highlight wrong with red
+***loop until out of questions (current question < total questions)***
+display results page
+  '.results-page'
+  hide question page
+    '.question-page'
+  retake quiz
+    '.btn' click
+    restart quiz (see *start quiz buttn is clicked*)
+*/
