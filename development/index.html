@@ -10,13 +10,13 @@
 <body>
   <!-- START PAGE -->
   <section class="start-page">
+    <div class="title">
+      Generic Quiz
+    </div>
     <div class="content">
-      <div class="title">
-        Generic Quiz
-      </div>
-  
       <div class="subtitle">
-        Some catchy question about being ready for the quiz.
+        Ready to see how much you know about general things?
+        If you think so, tap the button below to start the quiz!
       </div>
   
       <div class="quiz-start">
@@ -27,10 +27,15 @@
 
   <!-- QUESTION PAGE -->
   <section class="question-page">
-    <div class="quiz-info">
-      <div>Question: <span id="currentQuestion"><!-- jq fill --></span>/<span id="totalQuestions"><!-- jq fill --></span></div>
-      <div>Score: <span id="score"><!-- jq fill --></span></div>
+    <div class="title">
+      Generic Quiz
+
+      <div class="quiz-info">
+        <div>Question: <span id="currentQuestion"><!-- jq fill --></span>/<span id="totalQuestions"><!-- jq fill --></span></div>
+        <div>Score: <span id="score"><!-- jq fill --></span></div>
+      </div>
     </div>
+    
     <div class="content">
       
       <div id="questionArea"></div>
@@ -62,11 +67,10 @@
 
   <!-- RESULTS PAGE -->
   <section class="results-page">
+    <div class="title">
+      You <span id="pass-fail"><!-- jq fill --></span> this quiz.
+    </div>
     <div class="content">
-      <div class="title">
-        You <span id="pass-fail"><!-- jq fill --></span> this quiz.
-      </div>
-
       <div class="subtitle">
         <div>Total Questions: <span id="questionAmount"><!-- jq fill --></span></div>
         <div>Correct Answers: <span id="correctAnswers"><!-- jq fill --></span></div>

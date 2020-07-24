@@ -1,7 +1,7 @@
 // A bank of questions to ask
 const STORE = [
   {
-    question: "What are you doing",
+    question: "What are you doing?",
     answers: [
       'Nothing',
       'Everything',
@@ -150,8 +150,8 @@ const startQuiz = () => {
   totalQuestions = STORE.length;
   //display a question
   displayQuestion();
-  //hide start page
-  $('.start-page').hide();
+  //hide start, results page
+  $('.start-page, .results-page').hide();
   //show quiz
   $('.question-page').show();
 }
