@@ -5,40 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz App</title>
 
+  <script src="https://kit.fontawesome.com/2502dc8738.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <!-- START PAGE -->
   <section class="start-page">
-    <div class="title">
-      Generic Quiz
-    </div>
-    <div class="content">
+    <div class="header">
+      <div class="title">
+        Generic Quiz
+      </div>
+
       <div class="subtitle">
         Ready to see how much you know about general things?
         If you think so, tap the button below to start the quiz!
       </div>
-  
-      <div class="quiz-start">
-        <div id="quiz-start" class="btn">Start</div>
-      </div>
+    </div>
+
+    <div class="brain">
+      <i class="fas fa-brain"></i>
+    </div>
+      
+    <div class="quiz-start">
+      <div id="quiz-start" class="btn">Start</div>
     </div>
   </section>
 
   <!-- QUESTION PAGE -->
   <section class="question-page">
-    <div class="title">
-      Generic Quiz
-
-      <div class="quiz-info">
-        <div>Question: <span id="currentQuestion"><!-- jq fill --></span>/<span id="totalQuestions"><!-- jq fill --></span></div>
+    <div class="header">
+      <div class="title">Generic Quiz
         <div>Score: <span id="score"><!-- jq fill --></span></div>
       </div>
-    </div>
-    
-    <div class="content">
       
-      <div id="questionArea"></div>
+      <div id="question-area"></div>
+    </div>
+      
       <form id="form">
         <div>
           <input id=0 type="radio" name="choice" value=0 />
@@ -62,27 +64,35 @@
         
         <input type="submit" class="btn" value="Final Answer" />
       </form>
-    </div>
+      <div class="quiz-info">
+        <!-- jq fills questions bubble progress -->
+      </div>
   </section>
 
   <!-- RESULTS PAGE -->
   <section class="results-page">
-    <div class="title">
-      You <span id="pass-fail"><!-- jq fill --></span> this quiz.
-    </div>
-    <div class="content">
-      <div class="subtitle">
-        <div>Total Questions: <span id="questionAmount"><!-- jq fill --></span></div>
-        <div>Correct Answers: <span id="correctAnswers"><!-- jq fill --></span></div>
-        <div>Incorrect Answers: <span id="incorrectAnswers"><!-- jq fill --></span></div>
+    <div class="header">
+      <div class="title">
+        Generic Quiz
+      </div>
 
-        <div>Grade: <span id="percentage"><!-- jq fill --></span></div>
+      <div class="subtitle">
+        Results
+        <div>You <span id="pass-fail"></span> this quiz.</div>
       </div>
+    </div>
+    
+    <div class="results">
+      <div>Total Questions: <span id="questionAmount"><!-- jq fill --></span></div>
+      <div>Correct Answers: <span id="correctAnswers"><!-- jq fill --></span></div>
+      <div>Incorrect Answers: <span id="incorrectAnswers"><!-- jq fill --></span></div>
+
+      <div>Grade: <span id="percentage"><!-- jq fill --></span></div>
+    </div>
       
-      <div class="result-btns">
-        <div class="btn">Retake</div>
-        <div class="btn">Home</div>
-      </div>
+    <div class="result-btns">
+      <div class="btn">Retake</div>
+      <div class="btn">Home</div>
     </div>
   </section>
 

@@ -104,7 +104,7 @@ const displayQuestion = () => {
     $('#score').text(score);
 
     //populate form fields
-    $('#questionArea').text(questionText);
+    $('#question-area').text(questionText);
     /*
     for (let i = 0; i < choices.length; i++) {
       $(`label[for=${i}]`).text(choices[i]);
@@ -154,6 +154,12 @@ const startQuiz = () => {
   $('.start-page, .results-page').hide();
   //show quiz
   $('.question-page').show();
+
+  //create quiz progress bubbles
+  $('.quiz-info').empty();
+  STORE.forEach( (q, ndx) => {
+    $('.quiz-info').append(`<div class="bubble${ndx} bubble"></div>`);
+  })
 }
 
 const checkAnswer = () => {
@@ -164,11 +170,15 @@ const checkAnswer = () => {
     $('#score').text(score);
     //highlight green
     userChoice.parent().addClass('correct');
+    //bubble green
+    $(`.bubble${curQ}`).addClass('correct');
   } else {
     //user choice red
     userChoice.parent().addClass('incorrect');
     //correct answer green
     $(`[id=${STORE[curQ].correctAnswer}]`).parent().addClass('correct');
+    //bubble red
+    $(`.bubble${curQ}`).addClass('incorrect');
   }
 
   //change button text
@@ -176,6 +186,16 @@ const checkAnswer = () => {
 }
 
 $(document).ready(function(){
+  //set height of .brain
+  const headerH = $('.header').outerHeight();
+  const startH = $('.quiz-start').outerHeight();
+  const subH = headerH + startH;
+  $('.brain').height($('body').height() - subH);
+
+  //set height of quiz-info (bubbles area)
+  const formH = $('form').outerHeight();
+  $('.quiz-info').height($('body').height() - formH - subH - 20);
+  
   //click listener for every button
   $('[class="btn"]').on('click', function(event){
     clickHandler(event);
